@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='yangsrunner',
-    version='0.0.1',
+    version='0.1.0',
     description='Terminal Application Runner',
     long_description='Terminal Application Runner',
     keywords=['terminal'],
