@@ -1,0 +1,14 @@
+# build directories
+build/
+dist/
+yangsrunner.egg-info/
+
+# virtualenv directories
+venv.dir/
+
+# pycharm directories
+.idea/
+
+# files
+*.pyc
+*.whl
