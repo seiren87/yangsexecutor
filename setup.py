@@ -3,9 +3,9 @@ from setuptools import setup, find_packages
 setup(
     name='yangsrunner',
     version='0.0.1',
-    description='.meta[yaml] base command framework',
-    long_description='.meta[yaml] base command framework',
-    keywords=['command', 'meta', 'yaml'],
+    description='Terminal Application Runner',
+    long_description='Terminal Application Runner',
+    keywords=['terminal'],
     license='MIT',
     python_requires='>=3.5',
     author='seiren87',
