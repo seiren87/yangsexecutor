@@ -8,7 +8,7 @@ class SimpleExecutor:
         self.setting_file = setting_file
 
     def _arguments(self):
-        raise NotImplementedError('if empty "return {}" ...')
+        raise NotImplementedError('IF empty "return {}", ELSE recommendation argparse ...')
 
     def start(self):
         # setting
@@ -17,15 +17,32 @@ class SimpleExecutor:
 
         setting = FileUtil.read_yml_file(self.setting_file)
 
-        # logger
-        logger = LogUtil.get_logger(app_name=setting['app_name'])
-
         # arg
         args = self._arguments()
 
         # app
-        ObjectUtil.get_class('%s.%s' % (setting['app_root'], args['app'].lower()), 'APP')(
-            args=args,
-            logger=logger,
-            setting=setting
-        ).start()
+        try:
+            app = ObjectUtil.get_class(
+                module_name='%s.%s' % (setting['app_root'].replace('/', '.'), args['app'].lower()),
+                class_name='APP'
+            )
+        except KeyError:
+            print('setting.yml[app_root] or arguments[app] is missing ...')
+            app = None
+
+        # validation
+        if app is None:
+            app_name = '%s-none' % setting['app_name']
+
+            logger = LogUtil.get_logger(app_name=app_name)
+
+            logger.info('Not found "%s" application ... ' % args['app'])
+
+        else:
+            app_name = '%s-%s' % (setting['app_name'], args['app'])
+
+            logger = LogUtil.get_logger(app_name=app_name)
+
+            logger.info('Execute "%s" application ... ' % args['app'])
+
+            app(args=args, logger=logger, setting=setting).start()

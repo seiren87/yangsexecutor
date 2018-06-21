@@ -9,6 +9,9 @@ venv.dir/
 # pycharm directories
 .idea/
 
+# test directories
+log/
+
 # files
 *.pyc
 *.whl

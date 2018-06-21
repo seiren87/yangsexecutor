@@ -1,0 +1,5 @@
+#######
+# app #
+#######
+app_root: tests/apps
+app_name: yangsrunner_test
