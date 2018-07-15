@@ -26,14 +26,20 @@ def make_init_project(project_name):
     FileUtil.save_file(
         file_path=os.path.join(project_name, 'main.py'),
         string_contents="""from yangsrunner import SimpleExecutor
+import argparse
 
 
 class Main(SimpleExecutor):
 
     def __init__(self):
-        SimpleExecutor.__init__(self, setting_file='setting.yml')
-        
+        super(Main, self).__init__(setting_file='setting.yml')
 
+    def _arguments(self):
+        args = argparse.ArgumentParser()       
+        
+        return args.parse_args().__dict__
+        
+        
 if __name__ == '__main__':
     Main().start()
 """,

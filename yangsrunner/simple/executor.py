@@ -36,7 +36,16 @@ class SimpleExecutor:
 
             logger = LogUtil.get_logger(app_name=app_name)
 
-            logger.info('Not found "%s" application ... ' % args['app'])
+            if args is None or len(args.keys()) == 0:
+                app_name_for_log = setting['app_name']
+
+            else:
+                try:
+                    app_name_for_log = args['app']
+                except KeyError:
+                    app_name_for_log = setting['app_name']
+
+            logger.info('Not found "%s" application ... ' % app_name_for_log)
 
         else:
             app_name = '%s-%s' % (setting['app_name'], args['app'])
